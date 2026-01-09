@@ -76,13 +76,13 @@ export default {
   },
   db: {
     dbType: 'postgres',
-    dbHost: process.env.DB_HOST || 'localhost',
-    dbPort: Number(process.env.DB_PORT) || 5432,
-    dbUser: process.env.DB_USER || 'postgres',
-    dbPass: process.env.DB_PASS || '',
-    dbName: process.env.DB_NAME || 'postgres',
-    dbSchema: process.env.DB_SCHEMA || 'public',
-    dbSync: true, // Isso força a criação das tabelas
+    // Usamos a URL completa para não ter erro de mapeamento
+    uri: process.env.DATABASE_URL, 
+    dbSync: true,
+    define: {
+      timestamps: true,
+      underscored: true,
+    }
   },
   aws_s3: {
     region: 'sa-east-1' as any,
